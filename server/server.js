@@ -6,10 +6,11 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
 const cors = require('cors')
+const corsOptions = require('./config/corsOptions')
 const cookieParser = require('cookie-parser')
 const pool = require("./db")
 
-app.use(cors())
+app.use(cors(corsOptions))
 app.use(cookieParser())
 app.use(express.json())
 
@@ -19,11 +20,12 @@ app.post('/signup', async (req, res) => {
   try {
     const hashedPassword = await bcrypt.hash(req.body.password, 10)
 
-    const text = 'INSERT INTO User(username, email, password, company) VALUES ($1, $2, $3, $4)'
-    const values = [req.body.username, req.body.email, hashedPassword, req.body.company]
+    const text = 'INSERT INTO Users(username, email, password) VALUES ($1, $2, $3)'
+    const values = [req.body.username, req.body.email, hashedPassword]
 
     await pool.query(text, values)
     res.status(201).send('Sign up successfully')
+    console.log("signup success")
   } catch {
     res.status(500).send('Cannot sign up')
   }
@@ -38,23 +40,33 @@ function generateAccessToken(user) {
 app.post('/login', async (req, res) => {
   try {
     // CHECK USERNAME IN DATABASE
-    const text = 'SELECT * FROM User WHERE username = $1'
-    const values = [req.body.username]
-    const username = req.body.username
-
-    const user = { name: username }
+    const text = 'SELECT * FROM Users WHERE email = $1'
+    const values = [req.body.email]
 
     const result = await pool.query(text, values)
 
     if (result.rows.length > 0) {
       // CHECK PASSWORD
       if (await bcrypt.compare(req.body.password, result.rows[0]["password"])) {
-        // GIVE ACCESS TOKEN
 
+        // GENERATE ACCESS TOKEN
+        const user = { username: result.rows[0]["username"], email: result.rows[0]["email"] }
         const accessToken = generateAccessToken(user)
         const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET)
 
-        res.json({ accessToken: accessToken, refreshToken: refreshToken })
+        const addRefreshTokenQuery = "UPDATE Users SET refreshToken = $1 WHERE email = $2;"
+        const addRefreshTokenParams = [refreshToken, req.body.email]
+        await pool.query(addRefreshTokenQuery, addRefreshTokenParams, (err, result) => {
+          if (err) {
+
+          } else {
+            // SEND BACK THE TOKENS
+            res.cookie('jwt', refreshToken, { httpOnly: true, maxAge: 24*60*60*1000})
+            res.json({ accessToken: accessToken })
+          }
+        })
+
+
 
       } else {
 
@@ -68,6 +80,10 @@ app.post('/login', async (req, res) => {
     res.status(500).send()
   }
 })
+
+/////////////////////// REFRESH TOKEN //////////////////////////
+
+
 
 
 /////////////////////// GET YOUR BLOGS //////////////////////////
