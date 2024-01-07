@@ -1,16 +1,14 @@
 import React, { useState, useEffect, useContext } from 'react';
-import useAuth from '../hooks/useAuth';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import axios from '../api/axios';
 import { CredInput, SubmitButton } from '../components/shared/Input';
 
-const LOGIN_URL = "/login"
+const SIGN_UP_URL = "/signup"
 
-const Login = () => {
-  const { setAuth } = useAuth();
+const SignUp = () => {
   const [errMsg, setErrMsg] = useState('')
-
   const [formData, setFormData] = useState({
+    username: '',
     email: '',
     password: '',
   });
@@ -25,9 +23,10 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log('submitting')
 
     try {
-      const response = await axios.post(LOGIN_URL,
+      const response = await axios.post(SIGN_UP_URL,
         formData,
         {
           headers: { 'Content-Type': 'application/json' },
@@ -35,12 +34,10 @@ const Login = () => {
         }
       );
       console.log(JSON.stringify(response?.data));
-      console.log('success')
 
-      const accessToken = response?.data?.accessToken;
-
-      setAuth({ email: formData.email, accessToken: accessToken });
+      console.log("Signup success!!!")
       setFormData({
+        username: '',
         email: '',
         password: '',
       })
@@ -59,18 +56,30 @@ const Login = () => {
       console.log(errMsg)
   }
 
+    console.log('Submitted data:', formData);
     // Reset the form after submission
     setFormData({
+      username: '',
       email: '',
-      password: '',
+      password: ''
     });
   };
 
   return (
     <div className='flex w-full h-auto min-h-[100vh] justify-center items-center bg-gradient-to-r from-cyan-500 to-blue-500'>
-      <div className='flex flex-col w-[390px] h-[420px] bg-white overflow-hidden pt-[80px] px-[55px] pb-[30px] gap-[0.975rem] rounded-[20px]'>
-      <div className='text-center text-3xl font-author font-semibold '>Login </div>
+      <div className='flex flex-col w-[390px] h-[450px] bg-white overflow-hidden pt-[80px] px-[55px] pb-[30px] gap-[0.975rem] rounded-[20px]'>
+      <div className='text-center text-3xl font-author font-semibold '>Sign Up </div>
 
+
+      <CredInput
+        type="text"
+        id="username"
+        name="username"
+        placeholder="Username"
+        value={formData.username}
+        onChange={handleChange}
+        required
+      />
 
       <CredInput
         type="text"
@@ -92,8 +101,8 @@ const Login = () => {
         required
       />
 
-      <form className='flex justify-center' onSubmit={handleSubmit}>
-        <SubmitButton type="submit" >Submit</SubmitButton>
+      <form className='flex justify-center'>
+        <SubmitButton onSubmit={handleSubmit}>Submit</SubmitButton>
       </form>
 
 
@@ -102,4 +111,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SignUp;

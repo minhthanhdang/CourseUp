@@ -1,10 +1,9 @@
-import Modal from '../InfoCard/Modal';
 import { NavBackground, LogoLink, LogoStyled, Item, ItemText } from './Style';
 
 const NavLeft = () => {
   return (
     <>
-    <Modal />
+
     <NavBackground>
       <LogoLink to="/test">
         <LogoStyled />
