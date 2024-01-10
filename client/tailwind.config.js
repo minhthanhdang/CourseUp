@@ -10,11 +10,17 @@ export default {
     extend: {
       colors: {
         primary: "#111111",
-        blackBackground: "#222222"
+        black: "#031d17",
+        bgLight3: "#e5e0dc",
+        bgLight2: '#dfdede',
+        bgLight1: '#F4F5F7',
+        bgPrimary: '#F7F6F5'
       },
       boxShadow: {
         'input': '0 5px 30px 0 rgba(0,0,0,.1)',
-        'purple':  '0 10px 30px 0 rgba(189,89,212,.5)'
+        'purple':  '0 10px 30px 0 rgba(189,89,212,.5)',
+        'staticCard': 'box-shadow: 0px 1px 2px 0px rgba(9, 30, 66, 0.25)',
+        'movingCard': 'box-shadow: 5px 10px 30px 0px rgba(9, 30, 66, 0.15)'
       }
     },
   },

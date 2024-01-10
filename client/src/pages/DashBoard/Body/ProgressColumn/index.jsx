@@ -1,12 +1,12 @@
 import { Droppable } from 'react-beautiful-dnd'
 import DetailsCard from '../DetailsCard'
 
-const ProgressColumn = ({ title, dropID }) => {
+const ProgressColumn = ({ title, dropID, content }) => {
 
   const cardList = [
-    {index: 0, title: 'title0'},
-    {index: 1, title: 'title1'},
-    {index: 2, title: 'title2'},
+    {index: 0, title: 'Todo1'},
+    {index: 1, title: 'Todo2'},
+    {index: 2, title: 'Todo3'},
   ]
 
   return (
@@ -21,8 +21,8 @@ const ProgressColumn = ({ title, dropID }) => {
             {...provided.droppableProps}
             ref={provided.innerRef}
           >
-            {cardList.map((value) => (
-              <DetailsCard key={value.title} index={value.index} title={value.title}/>
+            {content.map((value, index) => (
+              <DetailsCard key={index} index={index} content={value}/>
             ))}
             {provided.placeholder}
           </div>

@@ -6,6 +6,8 @@ import { CredInput, SubmitButton } from '../components/shared/Input';
 const SIGN_UP_URL = "/signup"
 
 const SignUp = () => {
+  const navigate = useNavigate()
+
   const [errMsg, setErrMsg] = useState('')
   const [formData, setFormData] = useState({
     username: '',
@@ -41,8 +43,7 @@ const SignUp = () => {
         email: '',
         password: '',
       })
-      //navigate(from, { replace: true });
-
+      navigate('/login', { replace: true });
     } catch (err) {
       if (!err?.response) {
         setErrMsg('No Server Response');
@@ -54,15 +55,7 @@ const SignUp = () => {
         setErrMsg('Login Failed');
       }
       console.log(errMsg)
-  }
-
-    console.log('Submitted data:', formData);
-    // Reset the form after submission
-    setFormData({
-      username: '',
-      email: '',
-      password: ''
-    });
+    }
   };
 
   return (
@@ -101,8 +94,8 @@ const SignUp = () => {
         required
       />
 
-      <form className='flex justify-center'>
-        <SubmitButton onSubmit={handleSubmit}>Submit</SubmitButton>
+      <form className='flex justify-center' onSubmit={handleSubmit}>
+        <SubmitButton >Submit</SubmitButton>
       </form>
 
 

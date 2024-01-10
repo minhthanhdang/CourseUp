@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 export const NavBackground = ({children}) => {
   return (
     <aside className='
-      fixed top-0 left-0 overflow-x-hidden h-screen w-[64px] bg-black transition-all duration-100 hover:w-[200px] hover:shadow-lg group'>
+      fixed top-0 left-0 overflow-x-hidden h-screen w-[64px] bg-black transition-all duration-100 hover:w-[200px] hover:shadow-lg group z-10'>
       {children}
     </aside>
   )

@@ -10,6 +10,8 @@ const Login = () => {
   const { setAuth } = useAuth();
   const [errMsg, setErrMsg] = useState('')
 
+  const navigate = useNavigate()
+
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -38,13 +40,14 @@ const Login = () => {
       console.log('success')
 
       const accessToken = response?.data?.accessToken;
+      const userId = response?.data?.userId
 
-      setAuth({ email: formData.email, accessToken: accessToken });
+      setAuth({ userId: userId, accessToken: accessToken });
       setFormData({
         email: '',
         password: '',
       })
-      //navigate(from, { replace: true });
+      navigate('/myCourses', { replace: true });
 
     } catch (err) {
       if (!err?.response) {
