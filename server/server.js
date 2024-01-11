@@ -14,9 +14,14 @@ app.use(cors(corsOptions))
 app.use(cookieParser())
 app.use(express.json())
 
+app.use('/signup', require('./routes/auth/signup'))
+app.use('/login', require('./routes/auth/login'))
+app.use('/courses', require('./routes/api/courses'))
+app.use('/dashboard', require('./routes/api/dashboard'))
+app.use('/refresh', require('./routes/refresh'))
 
 /////////////////////// SIGN UP //////////////////////////
-app.post('/signup', async (req, res) => {
+/*app.post('/signup', async (req, res) => {
   try {
     const hashedPassword = await bcrypt.hash(req.body.password, 10)
 
@@ -29,11 +34,11 @@ app.post('/signup', async (req, res) => {
   } catch {
     res.status(500).send('Cannot sign up')
   }
-})
+})*/
 
 
 /////////////////////// LOG IN //////////////////////////
-function generateAccessToken(user) {
+/*function generateAccessToken(user) {
   return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '30s'})
 }
 
@@ -43,26 +48,26 @@ app.post('/login', async (req, res) => {
     const text = 'SELECT * FROM Users WHERE email = $1'
     const values = [req.body.email]
 
-    const result = await pool.query(text, values)
+    const userResult = await pool.query(text, values)
 
-    if (result.rows.length > 0) {
+    if (userResult.rows.length > 0) {
       // CHECK PASSWORD
-      if (await bcrypt.compare(req.body.password, result.rows[0]["password"])) {
+      if (await bcrypt.compare(req.body.password, userResult.rows[0]["password"])) {
 
         // GENERATE ACCESS TOKEN
-        const user = { username: result.rows[0]["username"], email: result.rows[0]["email"] }
+        const user = { userId: userResult.rows[0]["id"], email: userResult.rows[0]["email"] }
         const accessToken = generateAccessToken(user)
         const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET)
 
-        const addRefreshTokenQuery = "UPDATE Users SET refreshToken = $1 WHERE email = $2;"
-        const addRefreshTokenParams = [refreshToken, req.body.email]
-        await pool.query(addRefreshTokenQuery, addRefreshTokenParams, (err, result) => {
+        const addRefreshTokenQuery = "UPDATE Users SET refreshToken = $1 WHERE id = $2;"
+        const addRefreshTokenParams = [refreshToken, userResult.rows[0]["id"]]
+        pool.query(addRefreshTokenQuery, addRefreshTokenParams, (err, result) => {
           if (err) {
 
           } else {
             // SEND BACK THE TOKENS
-            res.cookie('jwt', refreshToken, { httpOnly: true, maxAge: 24*60*60*1000})
-            res.json({ accessToken: accessToken })
+            res.cookie('refreshToken', refreshToken, { httpOnly: true, maxAge: 24*60*60*1000})
+            res.json({ userId: userResult.rows[0]["id"], accessToken: accessToken })
           }
         })
 
@@ -79,7 +84,7 @@ app.post('/login', async (req, res) => {
   } catch {
     res.status(500).send()
   }
-})
+})*/
 
 /////////////////////// REFRESH TOKEN //////////////////////////
 
