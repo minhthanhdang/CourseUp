@@ -1,5 +1,4 @@
 import { Routes, Route } from 'react-router-dom';
-import NavLeft from './components/NavLeft/NavLeft';
 import Test from './pages/Test';
 import Login from './pages/Login';
 import DashBoard from './pages/DashBoard';

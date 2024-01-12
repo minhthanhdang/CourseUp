@@ -1,9 +1,7 @@
-import NavLeft from '../../components/NavLeft/NavLeft'
 import useRefreshToken from '../../hooks/useRefreshToken'
 import Header from '../../components/Header'
 import { DashBoardWrapper } from './styles'
 import { useEffect, useState } from 'react'
-import Breadcrumbs from '../../components/Breadcrumbs'
 import Body from './Body'
 import axios from '../../api/axios'
 
@@ -29,9 +27,8 @@ const DashBoard = () => {
 
   return (
     <>
-      <NavLeft />
+
       <DashBoardWrapper>
-        <Breadcrumbs items={['Haha', "Hahaha"]} />
         <Header />
         <Body dashboardContent={dashboardContent}/>
       </DashBoardWrapper>

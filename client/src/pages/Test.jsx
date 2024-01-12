@@ -1,5 +1,5 @@
 import Modal from '../components/InfoCard/Modal'
-import NavLeft from '../components/NavLeft/NavLeft';
+import NavLeft from '../components/Layout/NavLeft';
 import StyledButton from '../components/shared/Button';
 
 const Test = () => {
