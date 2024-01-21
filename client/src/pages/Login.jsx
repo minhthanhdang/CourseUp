@@ -36,8 +36,6 @@ const Login = () => {
           withCredentials: true
         }
       );
-      console.log(JSON.stringify(response?.data));
-      console.log('success')
 
       const accessToken = response?.data?.accessToken;
       const userId = response?.data?.userId

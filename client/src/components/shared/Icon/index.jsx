@@ -1,10 +1,14 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBookmark, faMagnifyingGlass, faBell } from '@fortawesome/free-solid-svg-icons'
+import { faBookmark, faMagnifyingGlass, faBell, faBarsProgress, faBookOpen, faGreaterThan, faLessThan } from '@fortawesome/free-solid-svg-icons'
 
 const toFontAwesome = {
   'task': faBookmark,
   'search': faMagnifyingGlass,
-  'noti': faBell
+  'noti': faBell,
+  'dashboard': faBarsProgress,
+  'courses': faBookOpen,
+  'nextPage': faGreaterThan,
+  'prevPage': faLessThan
 }
 
 const Icon = ({ name, className }) => {

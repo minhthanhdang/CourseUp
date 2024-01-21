@@ -5,29 +5,16 @@ import NavTop from './Layout/NavTop';
 
 const Layout = () => {
   return (
-    <>
-      <div className='grid grid-cols-12 h-screen'>
-        <div className='col-span-2'>
-          <NavLeft />
-        </div>
-        <div className='col-span-10'>
-          <ContentWrapper>
-            <div className='grid grid-rows-12 h-full'>
-              <div className='row-span-1'>
-                <NavTop />
-              </div>
-              <div className='row-span-11 pt-[20px]'>
-                <Outlet />
-              </div>
-            </div>
-
-
-
-
-          </ContentWrapper>
+    <div className='flex relative'>
+      <div className='h-screen w-navLeft fixed'>
+        <NavLeft />
+      </div>
+      <div className='ml-navLeft flex-1'>
+        <div className=''>
+          <Outlet />
         </div>
       </div>
-    </>
+    </div>
   )
 }
 

@@ -15,4 +15,7 @@
     border: 6px solid transparent;
     background-clip: content-box;
   }
+  html {
+    letter-spacing: -0.05em;;
+  }
 }

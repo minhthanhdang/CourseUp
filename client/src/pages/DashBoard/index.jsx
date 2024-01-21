@@ -1,5 +1,4 @@
 import useRefreshToken from '../../hooks/useRefreshToken'
-import Header from '../../components/Header'
 import { DashBoardWrapper } from './styles'
 import { useEffect, useState } from 'react'
 import Body from './Body'
@@ -29,8 +28,6 @@ const DashBoard = () => {
     <>
 
       <DashBoardWrapper>
-        <Header />
-        <Body dashboardContent={dashboardContent}/>
       </DashBoardWrapper>
     </>
   )

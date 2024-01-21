@@ -1,9 +1,10 @@
 const pool = require("../db")
 
 const handleLogout = async (req, res) => {
-
   const cookies = req.cookies;
-  if (!cookies?.refreshToken) return res.sendStatus(204);
+  if (!cookies?.refreshToken) {
+    return res.sendStatus(204);
+  }
 
   const refreshToken = cookies.refreshToken;
 
@@ -11,10 +12,9 @@ const handleLogout = async (req, res) => {
     if (err) {
       return res.sendStatus(500)
     } else {
-      console.log(result.rows)
       if (result.rows.length > 0) {
         const foundUser = result.rows[0]
-        const deleteRefreshTokenQuery = "UPDATE Users SET refreshToken = '' WHERE id = $1;"
+        const deleteRefreshTokenQuery = "UPDATE Users SET refreshToken = null WHERE id = $1;"
         const deleteRefreshTokenParams = [foundUser.id]
         pool.query(deleteRefreshTokenQuery, deleteRefreshTokenParams, (err, result) => {
           if (err) {

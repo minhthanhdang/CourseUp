@@ -1,34 +1,18 @@
-import CircleAvatar from '../../components/CircleAvatar'
-import ProgressBar from '../../components/ProgressBar'
 
-const Course = ({course}) => {
+
+const CourseCard = ({ course }) => {
   return (
-    <>
-
-    <div className='flex flex-col overflow-hidden items-center hover:bg-bgLight2 rounded-3xl pl-[5px]'>
-      <div className='flex flex-row w-full items-center'>
-
-        <div className='px-[3px] py-[15px] rounded-[5px] w-full relative after:absolute after:left-0 after:bottom-0 after:w-full after:h-[2px] after:bg-[#ccc] after:content-[""]'>
-          <div className='flex justify-between'>
-            <div className='flex flex-row gap-[10px] items-center justify-start'>
-              <CircleAvatar />
-              <div className='ml-[12px] text-[20px] font-semibold'>
-                {course.name}
-              </div>
-            </div>
-            <div className='flex flex-row gap-[25px] items-center justify-end pr-[10px]'>
-              <div className='text-[20px] font-normal'>
-                Student
-              </div>
-              <ProgressBar progress={50}/>
-            </div>
-          </div>
+    <div className='inline-block mx-6 transition-all duration-100 hover:translate-x-2 hover:-translate-y-4 hover:scale-105'>
+      <div className='bg-white shadow-lg flex flex-col items-center rounded-3xl w-[20rem] h-[18rem] py-6 gap-2'>
+        <div className='w-[16rem]'>
+          <img src={course.src} className=' object-contain rounded-3xl m-auto'/>
+        </div>
+        <div className='text-[20px]'>
+          {course?.name}
         </div>
       </div>
     </div>
-    </>
   )
 }
 
-
-export default Course
+export default CourseCard

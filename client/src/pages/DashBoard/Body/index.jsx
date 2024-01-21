@@ -5,9 +5,6 @@ import ProgressColumn from './ProgressColumn';
 const Body = ({ status, dashboardContent }) => {
 
 
-
-
-
   const handleDrop = ({ draggableID, destination, source }) => {
     if (!isPositionChanged(source, destination)) return
 
