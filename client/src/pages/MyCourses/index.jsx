@@ -1,19 +1,22 @@
-import { useEffect, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import useAxiosPrivate from '../../hooks/useAxioxPrivate'
-import { useLocation, useNavigate, useOutletContext } from 'react-router-dom'
+import { Routes, useLocation, useNavigate, useOutletContext } from 'react-router-dom'
 import useAuth from '../../hooks/useAuth'
-
+import { Route } from 'react-router-dom'
 import { CourseOverviewSection, FooterSection, HeaderSection, ScrollSection } from './Components'
-import { ProgressChart } from './ProgressChart'
 import { Calendar } from '../../components/Calendar'
+import Modal from '../../components/InfoCard/Modal'
+import CourseDetail from './CourseDetail'
 
 const MyCourses = () => {
   const [courses, setCourses] = useState([])
+  const [suggestion, setSuggestion] = useState([])
   const axiosPrivate = useAxiosPrivate()
   const navigate = useNavigate()
   const location = useLocation()
   const { auth } = useAuth()
-  console.log(auth)
+
+  const background = location.state && location.state.background
 
   useEffect(() => {
     const controller = new AbortController()
@@ -29,37 +32,58 @@ const MyCourses = () => {
         })
     }
 
+    const fetchSuggestion = async () => {
+      axiosPrivate
+        .get('/courses/suggestion', {
+          signal: controller.signal
+        })
+        .then((res) => {
+          console.log(res.data)
+          setSuggestion(res.data)
+        })
+    }
     fetchCourses()
+    fetchSuggestion()
   }, [])
-
-  const staticCourses = [
-    { name: 'Cybersecurity', src: '../../../assets/cybersecurity.jpg'},
-    { name: 'AI application in quantum energy', src: '../../../assets/ai_in_energy.jpg'},
-    { name: 'Computer Systems', src: '../../../assets/computer_systems.jpg'}
-
-  ]
 
 
   return (
+
     <div className='flex shadow-lg '>
-      <div className='bg-bgLighter w-[64rem] px-[2rem] overflow-hidden'>
+      <div className='bg-bgLighter w-full px-[3rem] overflow-hidden'>
 
         <HeaderSection title='Thanh, welcome back' quote='Learning is a journey that never ends' />
 
         <CourseOverviewSection />
 
-        <ScrollSection title="Your courses" courses={staticCourses} />
+        <ScrollSection title="Your courses" courses={courses} location={location}/>
 
-        <ScrollSection title="Explore new courses" courses={staticCourses} />
+        <ScrollSection title="Explore new courses" courses={suggestion} location={location}/>
 
         <FooterSection />
 
-      </div>
-      <div className='bg-bgLight flex-1 px-[2rem]'>
-        <Calendar />
+        {background && (
+          <Routes>
+            <Route
+              path='course/:courseId'
+              element={
+                <Modal
+                  isOpen
+                  onClose={() => navigate(-1)}
+                  renderContent={modal => (
+                    <CourseDetail className='text-[3rem] text-black' />
+
+                  )}
+                />
+              }
+            />
+          </Routes>
+        )}
       </div>
 
+
     </div>
+
   )
 }
 

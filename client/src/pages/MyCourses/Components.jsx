@@ -1,5 +1,7 @@
 import CourseCard from './Course'
 import { ProgressChart } from './ProgressChart'
+import { useHorizontalScroll } from '../../hooks/frontend/useHorizontalScroll'
+import { Link, Outlet, useNavigate } from 'react-router-dom'
 
 export const HeaderSection = ({ title, quote }) => (
   <div className='relative h-32 w-full'>
@@ -37,18 +39,24 @@ export const CourseOverviewSection = () => {
 }
 
 
-export const ScrollSection = ({ title, courses }) => {
+export const ScrollSection = ({ title, courses, location }) => {
+  const horizontalScroll = useHorizontalScroll()
+  const navigate = useNavigate()
+
   return (
     <div className='overflow-x-hidden'>
       <div className='text-[25px] text-black font-bold '>
         {title}
       </div>
 
-      <div className='py-[30px] h-full overflow-x-scroll whitespace-nowrap custom-scrollbar'>
+      <div className='py-[30px] h-full overflow-x-scroll whitespace-nowrap custom-scrollbar' ref={horizontalScroll}>
         {courses.map(course => (
-          <CourseCard course={course} />
+          <Link to='course/12' state={{ background: location }}>
+            <CourseCard course={course} />
+          </Link>
         ))}
       </div>
+      <Outlet />
     </div>
   )
 }

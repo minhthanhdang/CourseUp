@@ -9,7 +9,7 @@ const Layout = () => {
       <div className='h-screen w-navLeft fixed'>
         <NavLeft />
       </div>
-      <div className='ml-navLeft flex-1'>
+      <div className='pl-navLeft flex-1 w-full'>
         <div className=''>
           <Outlet />
         </div>

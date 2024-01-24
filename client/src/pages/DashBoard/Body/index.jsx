@@ -1,6 +1,8 @@
 import React from 'react'
 import { DragDropContext } from 'react-beautiful-dnd';
 import ProgressColumn from './ProgressColumn';
+import { Droppable } from 'react-beautiful-dnd';
+import DetailsCard from './DetailsCard';
 
 const Body = ({ status, dashboardContent }) => {
 
@@ -19,20 +21,32 @@ const Body = ({ status, dashboardContent }) => {
     console.log('Dropped!')
   }
 
-  const progressList = [
-    {title: 'In Progress', dropID: 'In Progress', content: dashboardContent.inProgress},
-    {title: 'Not Started', dropID: 'Not Started', content: dashboardContent.notStarted},
-    {title: 'Completed', dropID: 'Completed', content: dashboardContent.completed}
+  const cardList = [
+    {index: 0, title: 'Todo1'},
+    {index: 1, title: 'Todo2'},
+    {index: 2, title: 'Todo3'},
   ]
 
   return (
-    <DragDropContext onDragEnd={handleCardDrop}>
-      <div className='flex mt-[26px] mx-[5px] gap-[10px]'>
-        {progressList?.map((value) => (
-          <ProgressColumn key={value.title} title={value.title} dropID={value.dropID} content={value.content}/>
-        ))}
-      </div>
-    </DragDropContext>
+    <div className='w-full'>
+      <DragDropContext>
+        <Droppable droppableId='main'>
+          {provided => (
+            <div className='flex flex-col my-[5px] min-h-[400px] w-full rounded-md'>
+              <div
+                className='h-full px-[5px] grid grid-cols-2 '
+                {...provided.droppableProps}
+                ref={provided.innerRef}
+              >
+                {cardList.map(card=>(<DetailsCard index={card.index} content={card.title}/>))}
+                {provided.placeholder}
+              </div>
+            </div>
+          )}
+
+        </Droppable>
+      </DragDropContext>
+    </div>
   )
 }
 

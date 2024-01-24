@@ -10,7 +10,7 @@ export const ScrollOverlay = ({children}) => {
 
 export const ClickableOverlay = ({ elementRef, children}) => {
   return (
-    <div ref={elementRef} className='min-h-screen bg-opacity-[54] bg-trueGray-800 flex justify-center items-center p-[50px]'>
+    <div ref={elementRef} className='min-h-full bg-opacity-[54] bg-trueGray-800 flex justify-center items-center p-[50px]'>
       {children}
     </div>
   )

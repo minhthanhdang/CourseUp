@@ -10,7 +10,6 @@ const NavItems = [
 ]
 
 const NavLeft = () => {
-  const [active, toggleActive] = useToggle(true)
 
   return (
 
@@ -34,12 +33,8 @@ const NavLeft = () => {
 
 
 
-        <div className='row-span-1'>
-          <Active toggle={toggleActive} isActive={active}></Active>
-        </div>
-        <div className='row-span-1 flex justify-center'>
-          <LogoutButton>Logout</LogoutButton>
-        </div>
+
+
 
       </div>
 

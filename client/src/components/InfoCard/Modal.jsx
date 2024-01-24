@@ -25,7 +25,6 @@ const Modal = ({
 
     } else {
       tellParentToClose();
-      console.log(isOpen)
     }
   }, [isControlled, tellParentToClose]);
 

@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import Login from './pages/Login';
 import DashBoard from './pages/DashBoard';
 import SignUp from './pages/Signup';
@@ -9,6 +9,7 @@ import PersistLogin from './features/auth/PersistLogin';
 import Home from './pages/Home';
 
 function App() {
+
 
   return (
     <Routes>
@@ -22,7 +23,7 @@ function App() {
         <Route element={<RequireAuth />}>
           <Route element={<Layout />}>
             <Route path="dashboard" element={<DashBoard />} />
-            <Route path="myCourses" element={<MyCourses />} />
+            <Route path="myCourses/*" element={<MyCourses />} />
           </Route>
         </Route>
       </Route>
