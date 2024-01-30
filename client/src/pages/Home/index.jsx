@@ -1,9 +1,9 @@
 import { Logo } from '../../components/shared/Logo'
-
+import { Link } from 'react-router-dom'
 
 const Home = () => {
   return (
-    <>
+    <div className='max-w-[1480px] m-auto'>
       <div className='h-[12rem] py-[4rem] px-[3rem] md:px-[4rem] xl:px-[8rem]'>
         <div className='flex justify-between h-full'>
           <div className='flex h-full items-center'>
@@ -11,10 +11,9 @@ const Home = () => {
             <div className='font-semibold text-[2rem] text-[#00BFFF] pb-[8px] pl-[1rem]' >CourseUp</div>
           </div>
 
-          <div className='flex z-20'>
-            <div>Login</div>
-            <div>SignUp</div>
-
+          <div className='flex z-20 gap-[4rem] text-[1.2rem]'>
+            <Link to='/login'><div>Login</div></Link>
+            <Link to='/signup'><div>SignUp</div></Link>
           </div>
         </div>
       </div>
@@ -31,7 +30,7 @@ const Home = () => {
         </div>
       </div>
 
-    </>
+    </div>
   )
 }
 

@@ -4,6 +4,7 @@ import { ClickableOverlay, ScrollOverlay, StyledModal } from './Style';
 import PropTypes from 'prop-types';
 import useOnOutsideClick from '../../hooks/frontend/useOnOutsideClick';
 import useOnEscapeKeyDown from '../../hooks/frontend/useOnEscapeKeyDown';
+import Icon from '../shared/Icon';
 
 const Modal = ({
   isOpen: propsIsOpen,

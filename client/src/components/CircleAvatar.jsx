@@ -1,7 +1,7 @@
-const CircleAvatar = () => {
+const CircleAvatar = ({ src, className, children }) => {
   return (
-    <div className="w-12 h-12 bg-green-700 rounded-full flex items-center justify-center">
-      <span className="text-white font-bold text-lg">A</span>
+    <div className="w-10 h-10 rounded-full flex items-center justify-center border-[1px]" >
+      <span className="text-black font-bold text-lg ">{children}</span>
     </div>
   )
 }

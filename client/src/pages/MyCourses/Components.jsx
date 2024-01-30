@@ -51,7 +51,7 @@ export const ScrollSection = ({ title, courses, location }) => {
 
       <div className='py-[30px] h-full overflow-x-scroll whitespace-nowrap custom-scrollbar' ref={horizontalScroll}>
         {courses.map(course => (
-          <Link to='course/12' state={{ background: location }}>
+          <Link to={`course/${course.id}`} state={{ background: location }}>
             <CourseCard course={course} />
           </Link>
         ))}
@@ -65,7 +65,7 @@ export const ScrollSection = ({ title, courses, location }) => {
 export const FooterSection = () => (
   <div>
     <a rel='author' href='https://github.com/minhthanhdang' className='text-black'>
-      Created by Minh Thanh Dang
+      Created by Minh Thanh Dang. Images are AI generated.
     </a>
   </div>
 )

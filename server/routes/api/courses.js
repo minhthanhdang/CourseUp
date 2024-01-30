@@ -49,9 +49,10 @@ router.get('/suggestion', verifyAccessToken, async(req, res) => {
 
 
 router.get('/course/:id', verifyAccessToken, async (req, res) => {
-  const courseId = req.params.id
+  const courseId = [parseInt(req.params.id, 10)]
+  console.log(courseId)
   let result = {}
-  const query1 = 'SELECT name, categoryId, imgLink FROM Courses WHERE id = $1'
+  const query1 = 'SELECT name, imgLink FROM Courses WHERE id = $1;'
   const query2 = 'SELECT Users.username, Users.avatarLink FROM Users JOIN Administration ON Users.id = Administration.userId WHERE Administration.courseId = $1;'
   const query3 = 'SELECT COUNT(*) AS totalEnrolledUsers FROM Enrolment WHERE courseId = $1'
   try {
@@ -59,17 +60,19 @@ router.get('/course/:id', verifyAccessToken, async (req, res) => {
     if (course.rows.length == 0) {
       res.status(204)
     } else {
-      result.course = course.rows[0]
+      result.courseName = course.rows[0].name
+      result.imgLink = course.rows[0].imglink
     }
     const admin = await pool.query(query2, courseId)
     if (admin.rows.length != 0) {
-      result.admin = course.rows[0]
+      result.adminUsername = admin.rows[0].username
+      result.adminAvatarLink = admin.rows[0].avatarlink
     }
     const totalStudent = await pool.query(query3, courseId)
     if (totalStudent.rows.length != 0) {
       result.studentCount = course.rows[0].totalEnrolledUsers
     }
-
+    console.log(result)
     res.json(result)
   } catch {
     res.status(404)

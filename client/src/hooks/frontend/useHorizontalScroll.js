@@ -15,7 +15,8 @@ export function useHorizontalScroll () {
           e.preventDefault();
         }
         el.scrollTo({
-          left: el.scrollLeft + e.deltaY -20 ,
+          left: el.scrollLeft + e.deltaY * 4 ,
+          behavior: 'smooth'
         });
       };
       el.addEventListener('wheel', onWheel);

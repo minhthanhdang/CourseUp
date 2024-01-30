@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBookmark, faMagnifyingGlass, faBell, faBarsProgress, faBookOpen, faGreaterThan, faLessThan } from '@fortawesome/free-solid-svg-icons'
+import { faBookmark, faMagnifyingGlass, faBell, faBarsProgress, faBookOpen, faGreaterThan, faLessThan, faCircleXmark, faXmark } from '@fortawesome/free-solid-svg-icons'
 
 const toFontAwesome = {
   'task': faBookmark,
@@ -8,13 +8,14 @@ const toFontAwesome = {
   'dashboard': faBarsProgress,
   'courses': faBookOpen,
   'nextPage': faGreaterThan,
-  'prevPage': faLessThan
+  'prevPage': faLessThan,
+  'close': faXmark
 }
 
-const Icon = ({ name, className }) => {
+const Icon = ({ name, ...rest }) => {
   return (
-    <i className={`inline-block text-[15px] font-medium normal-case leading-4`}>
-      <FontAwesomeIcon icon={toFontAwesome[name]} className={className}/>
+    <i className={`inline-block text-[15px] font-medium normal-case leading-4`} {...rest}>
+      <FontAwesomeIcon icon={toFontAwesome[name]} />
     </i>
   )
 }
