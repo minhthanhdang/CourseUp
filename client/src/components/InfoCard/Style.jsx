@@ -10,7 +10,7 @@ export const ScrollOverlay = ({children}) => {
 
 export const ClickableOverlay = ({ elementRef, children}) => {
   return (
-    <div ref={elementRef} className='min-h-full w-full bg-opacity-[54%] bg-gray-300 flex justify-center items-center p-[50px]'>
+    <div ref={elementRef} className='min-h-full w-full bg-opacity-[54%] bg-gray-300 flex justify-center items-center px-[50px] py-auto'>
       {children}
     </div>
   )
@@ -18,7 +18,7 @@ export const ClickableOverlay = ({ elementRef, children}) => {
 
 export const StyledModal = ({ elementRef, children}) => {
   return (
-    <div ref={elementRef} className='inline-block relative w-full shadow-md bg-white z-50 text-white align-middle rounded-md max-w-[1040px] min-h-[100vh]'>
+    <div ref={elementRef} className='inline-block relative w-full max-h-[85%] shadow-md bg-white z-50 text-white align-middle rounded-md max-w-[1040px]'>
       {children}
     </div>
   )

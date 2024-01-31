@@ -1,6 +1,5 @@
 import { Outlet } from 'react-router-dom'
 import NavLeft from './Layout/NavLeft'
-import { ContentWrapper } from './shared/ContentWrapper';
 import NavTop from './Layout/NavTop';
 
 const Layout = () => {

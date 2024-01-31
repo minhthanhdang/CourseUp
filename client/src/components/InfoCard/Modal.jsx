@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom';
-import { Fragment, useCallback, useState, useRef, useEffect } from 'react';
+import { useCallback, useState, useRef, useEffect } from 'react';
 import { ClickableOverlay, ScrollOverlay, StyledModal } from './Style';
 import PropTypes from 'prop-types';
 import useOnOutsideClick from '../../hooks/frontend/useOnOutsideClick';
@@ -42,21 +42,19 @@ const Modal = ({
 
   const root = document.getElementById('root');
   return (
-    <Fragment>
+    <>
       {!isControlled && renderLink({ open: () => setStateOpen(true)})}
       {isOpen && ReactDOM.createPortal(
         <ScrollOverlay>
           <ClickableOverlay elementRef={$clickableOverlayRef}>
             <StyledModal elementRef={$modalRef}>
-              <button onClick={closeModal} className='text-black'>Close</button>
               {renderContent({ close: closeModal })}
-              <div>HAHA</div>
             </StyledModal>
           </ClickableOverlay>
         </ScrollOverlay>,
         root
       )}
-    </Fragment>
+    </>
   )
 }
 

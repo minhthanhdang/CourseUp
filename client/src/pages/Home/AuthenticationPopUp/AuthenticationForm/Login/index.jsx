@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import useAuth from '../hooks/useAuth';
+import useAuth from '../../../../../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
-import axios from '../api/axios';
-import { CredInput, SubmitButton } from '../components/shared/Input';
+import axios from '../../../../../api/axios';
+import { FormInput } from '../Components/FormInput';
+import { SubmitButton } from '../Components/SubmitButton';
 
 const LOGIN_URL = "/login"
 
@@ -71,7 +72,7 @@ const Login = () => {
 
     <div className='flex flex-col items-center w-[50%] gap-[0.975rem]'>
       <div className='text-center text-3xl font-author font-semibold '>Login </div>
-      <CredInput
+      <FormInput
         type="text"
         id="email"
         name="email"
@@ -81,7 +82,7 @@ const Login = () => {
         required
       />
 
-      <CredInput
+      <FormInput
         type="password"
         id="password"
         name="password"

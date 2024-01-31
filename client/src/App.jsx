@@ -1,5 +1,4 @@
 import { Routes, Route, useLocation } from 'react-router-dom';
-import Login from './pages/Login';
 import DashBoard from './pages/DashBoard';
 import SignUp from './pages/Signup';
 import RequireAuth from './features/auth/RequireAuth';
@@ -8,15 +7,14 @@ import Layout from './components/Layout';
 import PersistLogin from './features/auth/PersistLogin';
 import Home from './pages/Home';
 
+
 function App() {
 
 
   return (
     <Routes>
-      <Route path="/" element={<Home />}/>
-      <Route path="/login" element={<Login />} />
 
-      <Route path="/login" element={<Login />} />
+
       <Route path="/signup" element={<SignUp />} />
 
       <Route element={<PersistLogin />}>
@@ -27,6 +25,7 @@ function App() {
           </Route>
         </Route>
       </Route>
+      <Route path="/*" element={<Home />}/>
     </Routes>
   )
 }
