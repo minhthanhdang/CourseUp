@@ -1,20 +1,19 @@
-import { Fragment, useEffect, useState } from 'react'
-import useAxiosPrivate from '../../hooks/useAxioxPrivate'
-import { Routes, useLocation, useNavigate, useOutletContext } from 'react-router-dom'
-import useAuth from '../../hooks/useAuth'
-import { Route } from 'react-router-dom'
-import { CourseOverviewSection, FooterSection, HeaderSection, ScrollSection } from './Components'
-import { Calendar } from '../../components/Calendar'
-import Modal from '../../components/InfoCard/Modal'
-import CourseDetail from './CourseDetail'
+import { useState, useEffect } from 'react'
+import useAxiosPrivate from '../../../../hooks/useAxioxPrivate'
+import { Routes, Route, useLocation, useNavigate } from 'react-router-dom'
+import { ScrollSection } from './ScrollSection'
+import { CourseOverviewSection } from './CourseOverviewSection'
+import { Footer } from '../../Footer'
+import Header from '../../Header'
+import Modal from '../../../../components/InfoCard/Modal'
+import CourseModal from './CourseModal'
 
-const MyCourses = () => {
+const Courses = () => {
   const [courses, setCourses] = useState([])
   const [suggestion, setSuggestion] = useState([])
   const axiosPrivate = useAxiosPrivate()
   const navigate = useNavigate()
   const location = useLocation()
-  const { auth } = useAuth()
 
   const background = location.state && location.state.background
 
@@ -52,7 +51,7 @@ const MyCourses = () => {
     <div className='flex shadow-lg '>
       <div className='bg-bgLighter w-full px-[3rem] overflow-hidden'>
 
-        <HeaderSection title='Thanh, welcome back' quote='Learning is a journey that never ends' />
+        <Header title='Thanh, welcome back' quote='Learning is a journey that never ends' />
 
         <CourseOverviewSection />
 
@@ -60,7 +59,7 @@ const MyCourses = () => {
 
         <ScrollSection title="Explore new courses" courses={suggestion} location={location}/>
 
-        <FooterSection />
+        <Footer />
 
         {background && (
           <Routes>
@@ -71,7 +70,7 @@ const MyCourses = () => {
                   isOpen
                   onClose={() => navigate(-1)}
                   renderContent={modal => (
-                    <CourseDetail className='text-[3rem] text-black' />
+                    <CourseModal className='text-[3rem] text-black' />
 
                   )}
                 />
@@ -81,12 +80,9 @@ const MyCourses = () => {
         )}
       </div>
 
-
     </div>
-
   )
 }
 
 
-
-export default MyCourses;
+export default Courses;

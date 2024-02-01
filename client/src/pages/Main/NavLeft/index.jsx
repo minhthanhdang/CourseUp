@@ -1,7 +1,6 @@
-import { Link } from 'react-router-dom';
-import { Active, LogoutButton, NavItem } from './Components';
-import useToggle from '../../hooks/frontend/useToggle';
-import { Logo } from '../shared/Logo';
+import { NavItem } from './Components/NavItem';
+import { Logo } from '../../../components/shared/Logo';
+
 
 const NavItems = [
   { name: 'Dashboard', to: '/dashboard', icon: 'overview' },
@@ -9,13 +8,11 @@ const NavItems = [
   { name: 'Account', to: '/login', icon: 'account' }
 ]
 
+
 const NavLeft = () => {
-
   return (
-
     <aside className='w-navLeft h-full bg-white shadow-lg z-10 text-[2vw]'>
       <div className='flex flex-col'>
-
 
         <div className='flex gap-3 relative justify-center items-center h-32 text-[2rem]'>
           <Logo className='h-[2.5rem] mt-[4px]'/>
@@ -30,11 +27,6 @@ const NavLeft = () => {
           )) }
         </div>
         <div className='row-span-6 flex flex-col'/>
-
-
-
-
-
 
       </div>
 

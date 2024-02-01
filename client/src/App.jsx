@@ -1,31 +1,27 @@
 import { Routes, Route, useLocation } from 'react-router-dom';
-import DashBoard from './pages/DashBoard';
-import SignUp from './pages/Signup';
+import DashBoard from './pages/Main/Sections/Dashboard';
 import RequireAuth from './features/auth/RequireAuth';
-import MyCourses from './pages/MyCourses';
-import Layout from './components/Layout';
+import Courses from './pages/Main/Sections/Courses';
 import PersistLogin from './features/auth/PersistLogin';
 import Home from './pages/Home';
-
+import Main from './pages/Main';
 
 function App() {
-
 
   return (
     <Routes>
 
-
-      <Route path="/signup" element={<SignUp />} />
-
       <Route element={<PersistLogin />}>
         <Route element={<RequireAuth />}>
-          <Route element={<Layout />}>
+          <Route element={<Main />}>
             <Route path="dashboard" element={<DashBoard />} />
-            <Route path="myCourses/*" element={<MyCourses />} />
+            <Route path="myCourses/*" element={<Courses />} />
           </Route>
         </Route>
       </Route>
+
       <Route path="/*" element={<Home />}/>
+
     </Routes>
   )
 }

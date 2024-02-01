@@ -1,11 +1,9 @@
-import useRefreshToken from '../../hooks/useRefreshToken'
-import { DashBoardWrapper } from './styles'
 import { useEffect, useState } from 'react'
-import axios from '../../api/axios'
-import ProgressColumn from './Body/ProgressColumn'
+import Header from '../../Header'
 import { DragDropContext } from 'react-beautiful-dnd'
 import Body from './Body'
-import useAxiosPrivate from '../../hooks/useAxioxPrivate'
+import useAxiosPrivate from '../../../../hooks/useAxioxPrivate'
+
 
 const DashBoard = () => {
 
@@ -34,6 +32,7 @@ const DashBoard = () => {
       <div className='flex shadow-lg '>
         <div className='bg-bgLighter w-full px-[2rem] overflow-hidden min-h-[100vh]'>
 
+          <Header title='Thanh, welcome back' quote='Learning is a journey that never ends' />
 
           <Body />
 

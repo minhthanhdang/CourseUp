@@ -1,6 +1,7 @@
 import { useLocation, useNavigate, Routes, Route } from 'react-router-dom'
 import Modal from '../../../components/InfoCard/Modal'
 import Login from './AuthenticationForm/Login'
+import SignUp from './AuthenticationForm/SignUp'
 import AuthenticationModal from './AuthenticationModal'
 
 export const AuthenticationPopUp = () => {
@@ -30,7 +31,7 @@ export const AuthenticationPopUp = () => {
               isOpen
               onClose={() => navigate(-1)}
               renderContent={modal => (
-                <SignUp />
+                <AuthenticationModal children={<SignUp />} />
               )}
             />
         }

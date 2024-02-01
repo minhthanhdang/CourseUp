@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react'
-import useAxiosPrivate from '../../../hooks/useAxioxPrivate'
+import useAxiosPrivate from '../../../../../hooks/useAxioxPrivate'
 import { useParams } from 'react-router-dom'
-import useAuth from '../../../hooks/useAuth'
-import Icon from '../../../components/shared/Icon'
-import CircleAvatar from '../../../components/CircleAvatar'
+import Icon from '../../../../../components/shared/Icon'
+import CircleAvatar from '../../../../../components/CircleAvatar'
 
-const CourseDetail = ({ ...rest }) => {
+const CourseModal = ({ ...rest }) => {
   const [courseData, setCourseData] = useState({})
   const axiosPrivate = useAxiosPrivate()
   const { courseId } = useParams()
@@ -70,4 +69,4 @@ const CourseDetail = ({ ...rest }) => {
   )
 }
 
-export default CourseDetail
+export default CourseModal
