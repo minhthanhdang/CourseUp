@@ -12,11 +12,19 @@ export const ScrollSection = ({ title, courses, location }) => {
       </div>
 
       <div className='py-[30px] h-full overflow-x-scroll whitespace-nowrap custom-scrollbar' ref={horizontalScroll}>
-        {courses.map(course => (
-          <Link to={`course/${course.id}`} state={{ background: location }}>
-            <CourseCard course={course} />
-          </Link>
-        ))}
+        {courses
+          ? courses.length === 0
+            ? (
+              <div>No course to show. Ready to begin your journey?</div>
+
+            )
+            : courses.map(course => (
+              <Link to={`course/${course.id}`} state={{ background: location }}>
+                <CourseCard course={course} />
+              </Link>
+            ))
+          : (<div>No course to show. Ready to begin your journey?</div>)
+        }
       </div>
       <Outlet />
     </div>

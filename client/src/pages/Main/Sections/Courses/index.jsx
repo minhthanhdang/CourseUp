@@ -22,7 +22,7 @@ const Courses = () => {
 
     const fetchCourses = async () => {
       axiosPrivate
-        .get('/courses/user', {
+        .get('/courses/enrolled', {
           signal: controller.signal
         })
         .then((res) => {
